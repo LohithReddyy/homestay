@@ -17,11 +17,18 @@ public class AdminController {
 	
 	 @Autowired
 	 private AdminService adminservice;
-	 @GetMapping("/")
-     public String adminhome()
-     {
-    	 return "adminhome";
-     }
+//	 @GetMapping("/adminhome")
+//     public String adminhome()
+//     {
+//    	 return "adminhome";
+//     }
+	 @GetMapping("/adminhome")
+	 public ModelAndView adminHome()
+	 {
+		 ModelAndView mv = new  ModelAndView();
+			mv.setViewName("adminhome");
+			return mv;
+	 }
 	 @PostMapping("/checkadminlogin")
 	 public ModelAndView checkAdminLogin(HttpServletRequest request)
 	 {
