@@ -17,6 +17,7 @@
 <a href="/">Home</a> &nbsp;&nbsp;
 <a href="touristlogin">Tourist Login</a>&nbsp;&nbsp;
 <a href="touristregistration">Tourist Registration</a>&nbsp;&nbsp;
+<a href="hostregistration">Host Registration</a>&nbsp;&nbsp;
 <a href="adminhome">Admin Login</a>&nbsp;&nbsp;
 </div>
 </body>
