@@ -16,5 +16,10 @@ public class HostServiceImp1 implements HostService{
 		hostrepository.save(host);
 		return null;
 	}
+	@Override
+	public Host checkHostLogin(String email, String password) {
+		
+		return hostrepository.checkHostLogin(email, password);
+	}
 
 }

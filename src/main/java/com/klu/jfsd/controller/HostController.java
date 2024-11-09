@@ -11,6 +11,7 @@ import com.klu.jfsd.model.Tourist;
 import com.klu.jfsd.service.HostService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HostController {
@@ -67,4 +68,35 @@ public class HostController {
 	        
 	        return mv;
 	}
+	@GetMapping("hostlogin")
+	public ModelAndView hostlogin()
+	{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hostlogin");
+		return mv;
+	}
+	@PostMapping("checkhostlogin")
+	public ModelAndView hostlogin(HttpServletRequest request)
+	{
+		//TODO: process POST request
+				String hemail = request.getParameter("hemail");
+				String hpwd = request.getParameter("hpwd");
+				Host host = hostservice.checkHostLogin(hemail, hpwd);
+				ModelAndView mv=new ModelAndView();
+				if(host!=null)
+				{
+					HttpSession session = request.getSession();
+					session.setAttribute("tourist", host); // customer is the session object we can use 
+					mv.setViewName("hosthome");
+					// create a session variable 
+					
+				}
+				else
+				{
+					mv.setViewName("hostlogin");
+					mv.addObject("message","Login Failed");
+				}
+				return mv;
+	}
+	
 }

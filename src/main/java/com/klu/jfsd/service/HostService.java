@@ -5,5 +5,5 @@ import com.klu.jfsd.model.Tourist;
 
 public interface HostService {
 	public String hostRegistration(Host host);
-
+	public Host checkHostLogin(String email,String password);
 }
