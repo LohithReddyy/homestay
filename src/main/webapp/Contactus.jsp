@@ -7,6 +7,6 @@
 <title>Im in contact us page/title>
 </head>
 <body>
-// to test 
+  <h2>Contact US page</h2>
 </body>
 </html>
