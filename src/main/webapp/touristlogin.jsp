@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <title>JFSD</title>
+<style type="text/css">
+
+</style>
 </head>
 <body>
 <%@ include file="mainnavbar.jsp" %>
