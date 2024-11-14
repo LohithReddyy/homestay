@@ -18,14 +18,7 @@ public class HostController {
 	
 	@Autowired
 	private HostService hostservice;
-	
-//	@GetMapping("hostregistration")
-//	public ModelAndView hostregistration()
-//	{
-//		ModelAndView mv=new ModelAndView();
-//		mv.setViewName("hostregistration");
-//		return mv;
-//	}
+
 	@GetMapping("hostregistration")
 	public ModelAndView hostreg()
 	{
@@ -63,7 +56,7 @@ public class HostController {
 	        
 	        String message = hostservice.hostRegistration(host);
 	        ModelAndView mv = new ModelAndView();
-	        mv.setViewName("adminloginsuccess");
+	        mv.setViewName("hosthome");
 	        mv.addObject("message", message);
 	        
 	        return mv;

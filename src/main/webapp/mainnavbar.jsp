@@ -19,8 +19,8 @@
 
             <div class="nav-links">
                 <a href="${pageContext.request.contextPath}/" class="nav-item ${pageContext.request.servletPath eq '/index.jsp' || pageContext.request.servletPath eq '/home.jsp' ? 'active' : ''}">Home</a>
-                <a href="${pageContext.request.contextPath}/findhomestay" class="nav-item ${pageContext.request.servletPath eq '/findhomestay.jsp' ? 'active' : ''}">Find a HomeStay</a>
-                <a href="${pageContext.request.contextPath}/listroom" class="nav-item ${pageContext.request.servletPath eq '/listroom.jsp' ? 'active' : ''}">List a Room</a>
+                <a href="${pageContext.request.contextPath}/touristregistration" class="nav-item ${pageContext.request.servletPath eq '/findhomestay.jsp' ? 'active' : ''}">Find a HomeStay</a>
+                <a href="${pageContext.request.contextPath}/hostregistration" class="nav-item ${pageContext.request.servletPath eq '/listroom.jsp' ? 'active' : ''}">List a Room</a>
             </div>
 
             <div class="search-container">

@@ -56,7 +56,7 @@ public class TouristController {
 	        
 	        String message = touristservice.touristRegistration(tourist);
 	        ModelAndView mv = new ModelAndView();
-	        mv.setViewName("adminloginsuccess");
+	        mv.setViewName("touristlogin");
 	        mv.addObject("message", message);
 	        
 	        return mv;
