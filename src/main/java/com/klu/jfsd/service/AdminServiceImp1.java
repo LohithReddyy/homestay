@@ -41,4 +41,10 @@ public class AdminServiceImp1 implements AdminService {
 		// TODO Auto-generated method stub
 		return touristrepository.findAll();
 	}
+
+	@Override
+	public String addHost(Host host) {
+		hostrepository.save(host);
+		return null;
+	}
 }

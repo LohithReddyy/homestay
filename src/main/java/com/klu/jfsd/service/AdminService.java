@@ -10,4 +10,5 @@ public interface AdminService {
     public Admin checkAdminLogin(String username, String password);
     public List<Host> viewAllHosts();
     public List<Tourist> viewAllTourists();
+    public String addHost(Host host);
 }
