@@ -1,499 +1,521 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Travel&homestay- Your Perfect Homestay</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<style>
-    body {
-        font-family: 'Poppins', Arial, sans-serif;
-        background-color: #f7f7f7;
-        margin: 0;
-        padding: 0;
-        color: #484848;
-    }
-
-    /* Enhanced Hero Banner */
-    .hero-banner {
-        position: relative;
-        height: 600px;
-        overflow: hidden;
-    }
-
-    .hero-slider {
-        position: relative;
-        height: 100%;
-    }
-
-    .slide {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        transition: opacity 1s ease-in-out;
-    }
-
-    .slide.active {
-        opacity: 1;
-    }
-
-    .slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .hero-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5));
-        z-index: 1;
-    }
-
-    .hero-text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 2;
-        text-align: center;
-        width: 80%;
-    }
-
-    .hero-heading {
-        font-size: 3.5em;
-        font-weight: 700;
-        color: #fff;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        margin-bottom: 20px;
-    }
-
-    .hero-subtext {
-        font-size: 1.5em;
-        color: #fff;
-        margin-bottom: 30px;
-    }
-
-    /* Search Section */
-    .search-container {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        margin: -50px auto 50px;
-        position: relative;
-        z-index: 3;
-        max-width: 1000px;
-    }
-
-    .search-form {
-        display: flex;
-        gap: 15px;
-        flex-wrap: wrap;
-    }
-
-    .search-input {
-        flex: 1;
-        min-width: 200px;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-
-    /* Popular Destinations */
-    .destinations {
-        padding: 60px 0;
-        background: #fff;
-    }
-
-    .destination-card {
-        position: relative;
-        border-radius: 15px;
-        overflow: hidden;
-        margin-bottom: 30px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
-    }
-
-    .destination-card:hover {
-        transform: translateY(-10px);
-    }
-
-    .destination-img {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-    }
-
-    .destination-info {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 20px;
-        background: linear-gradient(transparent, rgba(0,0,0,0.8));
-        color: white;
-    }
-
-    /* Experience Categories */
-    .experiences {
-        padding: 60px 0;
-        background: #f8f9fa;
-    }
-
-    .experience-icon {
-        font-size: 2.5em;
-        color: #ff385c;
-        margin-bottom: 15px;
-    }
-
-    /* Reviews Section */
-    .reviews {
-        padding: 60px 0;
-        background: #fff;
-    }
-
-    .review-card {
-        background: #fff;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        margin: 15px;
-    }
-
-    .reviewer-img {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        margin-bottom: 15px;
-    }
-
-    /* Newsletter Section */
-    .newsletter {
-        background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80');
-        background-size: cover;
-        background-position: center;
-        padding: 80px 0;
-        color: white;
-        text-align: center;
-    }
-
-    .newsletter input {
-        width: 300px;
-        padding: 12px;
-        border: none;
-        border-radius: 5px 0 0 5px;
-    }
-
-    .newsletter button {
-        padding: 12px 30px;
-        background: #ff385c;
-        border: none;
-        color: white;
-        border-radius: 0 5px 5px 0;
-    }
-
-    /* Enhanced Footer */
-    .footer {
-        background: #2c3e50;
-        color: #ecf0f1;
-        padding: 60px 0 30px;
-    }
-
-    .footer h4 {
-        color: #ff385c;
-        margin-bottom: 20px;
-    }
-
-    .footer ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .footer ul li {
-        margin-bottom: 10px;
-    }
-
-    .footer a {
-        color: #ecf0f1;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-    .footer a:hover {
-        color: #ff385c;
-    }
-
-    .social-icons {
-        font-size: 1.5em;
-        margin-top: 20px;
-    }
-
-    .social-icons a {
-        margin: 0 10px;
-    }
-
-    /* Buttons */
-    .btn-primary {
-        background: #ff385c;
-        border: none;
-        padding: 12px 30px;
-        border-radius: 5px;
-        color: white;
-        font-weight: 600;
-        transition: background 0.3s ease;
-    }
-
-    .btn-primary:hover {
-        background: #e6324f;
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-
-    .animate-fade {
-        animation: fadeIn 1s ease-in;
-    }
-</style>
-</head>
-
-<body>
-    <jsp:include page="mainnavbar.jsp" />
-
-
-    <!-- Enhanced Hero Banner with Slider -->
-    <div class="hero-banner">
-        <div class="hero-slider">
-            <div class="slide active">
-                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Luxury Villa">
-            </div>
-        </div>
-        <div class="hero-overlay"></div>
-        <div class="hero-text">
-            <h1 class="hero-heading">Discover Your Perfect Homestay</h1>
-            <p class="hero-subtext">Explore unique places to stay around the world</p>
-            <button class="btn-primary">Start Your Journey</button>
-        </div>
-    </div>
-
-    <!-- Search Section -->
-    <div class="container">
-        <div class="search-container">
-            <form class="search-form">
-                <input type="text" class="search-input" placeholder="Where are you going?">
-                <input type="date" class="search-input" placeholder="Check-in">
-                <input type="date" class="search-input" placeholder="Check-out">
-                <input type="number" class="search-input" placeholder="Guests">
-                <button type="submit" class="btn-primary">Search</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Popular Destinations -->
-    <section class="destinations">
-        <div class="container">
-            <h2 class="text-center mb-5">Popular Destinations</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="destination-card">
-                        <img src="https://images.unsplash.com/photo-1580137189272-c9379f8864fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="destination-img" alt="Bali">
-                        <div class="destination-info">
-                            <h3>Bali, Indonesia</h3>
-                            <p>Starting from $50/night</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="destination-card">
-                        <img src="https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="destination-img" alt="Santorini">
-                        <div class="destination-info">
-                            <h3>Santorini, Greece</h3>
-                            <p>Starting from $80/night</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="destination-card">
-                        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="destination-img" alt="Swiss Alps">
-                        <div class="destination-info">
-                            <h3>Swiss Alps</h3>
-                            <p>Starting from $120/night</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Categories -->
-    <section class="experiences">
-        <div class="container text-center">
-            <h2 class="mb-5">Explore Experiences</h2>
-            <div class="row">
-                <div class="col-md-3">
-                    <i class="fas fa-mountain experience-icon"></i>
-                    <h4>Adventure</h4>
-                    <p>Thrilling outdoor activities</p>
-                </div>
-                <div class="col-md-3">
-                    <i class="fas fa-utensils experience-icon"></i>
-                    <h4>Culinary</h4>
-                    <p>Local food experiences</p>
-                </div>
-                <div class="col-md-3">
-                    <i class="fas fa-spa experience-icon"></i>
-                    <h4>Wellness</h4>
-                    <p>Relaxation & rejuvenation</p>
-                </div>
-                <div class="col-md-3">
-                    <i class="fas fa-landmark experience-icon"></i>
-                    <h4>Cultural</h4>
-                    <p>Local traditions & heritage</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section class="reviews">
-        <div class="container text-center">
-            <h2 class="mb-5">What Our Guests Say</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="review-card">
-                        <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Reviewer" class="reviewer-img">
-                        <h4>Sarah Johnson</h4>
-                        <p>"Amazing experience! The villa exceeded our expectations. Will definitely come back!"</p>
-                        <div class="rating">
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="review-card">
-                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Reviewer" class="reviewer-img">
-                        <h4>Michael Chen</h4>
-                        <p>"Perfect location and amazing hospitality. Couldn't ask for more!"</p>
-                        <div class="rating">
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star-half-alt text-warning"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="review-card">
-                        <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Reviewer" class="reviewer-img">
-                        <h4>Emma Wilson</h4>
-                        <p>"The cultural experience was unforgettable. Highly recommended!"</p>
-                        <div class="rating">
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="newsletter">
-        <div class="container">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get the latest updates and special offers directly in your inbox</p>
-            <div class="mt-4">
-                <input type="email" placeholder="Enter your email">
-                <button type="submit">Subscribe</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Enhanced Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <h4>About Traveleo</h4>
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Press Center</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Safety Information</a></li>
-                        <li><a href="#">Cancellation Options</a></li>
-                        <li><a href="#">COVID-19 Response</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h4>Host</h4>
-                    <ul>
-                        <li><a href="#">Become a Host</a></li>
-                        <li><a href="#">Host Resources</a></li>
-                        <li><a href="#">Community Forum</a></li>
-                        <li><a href="#">Host Protection</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h4>Connect with Us</h4>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="text-center mt-4">
-                <p>&copy; 2024 Taven&Homestay. All rights reserved.</p>
-                <p>
-                    <a href="#">Privacy Policy</a> |
-                    <a href="#">Terms of Service</a> |
-                    <a href="#">Cookie Policy</a>
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Hero Slider Animation
-        const slides = document.querySelectorAll('.slide');
-        let currentSlide = 0;
-
-        function nextSlide() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | Travel & HomeStay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF385C;
+            --primary-dark: #E31C5F;
+            --secondary: #00A699;
+            --background: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-700: #374151;
         }
 
-        setInterval(nextSlide, 5000);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            padding-top: 70px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: calc(100vh - 70px);
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                        url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .cta-button {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Welcome Bar */
+        .welcome-bar {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            text-align: right;
+            font-weight: 500;
+        }
+
+        /* Featured Destinations */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .section-light {
+            background: var(--gray-50);
+        }
+
+        .section-dark {
+            background: var(--gray-700);
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: inherit;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: inherit;
+            opacity: 0.9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .destination-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            background: white;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .destination-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .destination-details {
+            padding: 1.5rem;
+        }
+
+        .destination-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--gray-700);
+        }
+
+        .destination-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-700);
+            margin-bottom: 1rem;
+        }
+
+        .destination-price {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        /* Promotions Section */
+        .promotion-banner {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                        url('https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .promotion-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .promotion-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .promotion-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Reviews Section */
+        .review-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .reviewer-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .reviewer-info h4 {
+            margin: 0;
+            color: var(--gray-700);
+        }
+
+        .reviewer-info p {
+            margin: 0;
+            color: var(--gray-700);
+            opacity: 0.8;
+        }
+
+        .review-text {
+            color: var(--gray-700);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .review-rating {
+            color: #FFD700;
+        }
+
+        /* Popular Locations */
+        .location-card {
+            position: relative;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .location-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .location-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+        }
+
+        .location-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .location-properties {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+  <jsp:include page="mainnavbar.jsp" />
+
+    
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Your Perfect Getaway Awaits</h1>
+            <p>Discover unique homestays and create unforgettable memories</p>
+            <a href="${pageContext.request.contextPath}/touristlogin" class="cta-button">Start Your Journey</a>
+        </div>
+    </section>
+
+    <!-- Featured Destinations -->
+    <section class="section section-light">
+        <div class="section-title">
+            <h2>Featured Destinations</h2>
+            <p>Handpicked accommodations for your next adventure</p>
+        </div>
+        <div class="grid">
+            <div class="destination-card">
+                <div class="destination-image" style="background-image: url('https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="destination-details">
+                    <h3 class="destination-title">Luxury Villa with Pool</h3>
+                    <p class="destination-location"><i class="fas fa-map-marker-alt"></i> Goa, India</p>
+                    <p class="destination-price">₹12,000 per night</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <div class="destination-image" style="background-image: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="destination-details">
+                    <h3 class="destination-title">Mountain View Cottage</h3>
+                    <p class="destination-location"><i class="fas fa-map-marker-alt"></i> Manali, India</p>
+                    <p class="destination-price">₹8,000 per night</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <div class="destination-image" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="destination-details">
+                    <h3 class="destination-title">Heritage Haveli</h3>
+                    <p class="destination-location"><i class="fas fa-map-marker-alt"></i> Jaipur, India</p>
+                    <p class="destination-price">₹15,000 per night</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotion Banner -->
+    <section class="promotion-banner">
+        <div class="promotion-content">
+            <h2 class="promotion-title">Special Summer Offer!</h2>
+            <p class="promotion-text">Get 20% off on all bookings made before June 30th</p>
+            <a href="${pageContext.request.contextPath}/offers" class="cta-button">View Offers</a>
+        </div>
+    </section>
+
+    <!-- Popular Indian Destinations -->
+    <section class="section">
+        <div class="section-title">
+            <h2>Popular Destinations in India</h2>
+            <p>Explore the best locations across the country</p>
+        </div>
+        <div class="grid">
+            <div class="location-card">
+                <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="location-image" alt="Kerala Backwaters">
+                <div class="location-overlay">
+                    <h3 class="location-name">Kerala Backwaters</h3>
+                    <p class="location-properties">50+ properties</p>
+                </div>
+            </div>
+            <div class="location-card">
+                <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="location-image" alt="Himalayan Retreats">
+                <div class="location-overlay">
+                    <h3 class="location-name">Himalayan Retreats</h3>
+                    <p class="location-properties">75+ properties</p>
+                </div>
+            </div>
+            <div class="location-card">
+                <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="location-image" alt="Rajasthan Palaces">
+                <div class="location-overlay">
+                    <h3 class="location-name">Rajasthan Palaces</h3>
+                    <p class="location-properties">40+ properties</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guest Reviews -->
+    <section class="section section-light">
+        <div class="section-title">
+            <h2>What Our Guests Say</h2>
+            <p>Real experiences from real travelers</p>
+        </div>
+        <div class="grid">
+            <div class="review-card">
+                <div class="reviewer">
+                    <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Sarah" class="reviewer-image">
+                    <div class="reviewer-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Stayed in Goa</p>
+                    </div>
+                </div>
+                <p class="review-text">"Amazing experience! The villa exceeded our expectations. The host was incredibly helpful and the location was perfect."</p>
+                <div class="review-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="reviewer">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Michael" class="reviewer-image">
+                    <div class="reviewer-info">
+                        <h4>Michael Chen</h4>
+                        <p>Stayed in Manali</p>
+                    </div>
+                </div>
+                <p class="review-text">"The mountain views were breathtaking! Perfect place for a peaceful retreat. Will definitely come back."</p>
+                <div class="review-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="reviewer">
+                    <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Emma" class="reviewer-image">
+                    <div class="reviewer-info">
+                        <h4>Emma Wilson</h4>
+                        <p>Stayed in Jaipur</p>
+                    </div>
+                </div>
+                <p class="review-text">"Living in a heritage haveli was a unique experience. The architecture and hospitality were outstanding!"</p>
+                <div class="review-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.destination-card, .review-card, .location-card').forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight * 0.8) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
     </script>
 </body>
 </html>
