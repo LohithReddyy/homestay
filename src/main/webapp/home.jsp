@@ -270,7 +270,8 @@
 </head>
 
 <body>
-    <%@ include file="mainnavbar.jsp" %>
+    <jsp:include page="mainnavbar.jsp" />
+
 
     <!-- Enhanced Hero Banner with Slider -->
     <div class="hero-banner">

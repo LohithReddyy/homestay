@@ -11,7 +11,7 @@
 </style>
 </head>
 <body>
-<%@ include file="mainnavbar.jsp" %>
+<jsp:include page="mainnavbar.jsp" />
 <h3 align="center">Tourist Login Form</h3>
 <div class="container">
     <form method="post" action="checktouristlogin">
