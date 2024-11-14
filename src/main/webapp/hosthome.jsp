@@ -1,4 +1,9 @@
+<%@page import="com.klu.jfsd.model.Host"%>
+<%@page import="com.klu.jfsd.model.Tourist"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+Host c=(Host)session.getAttribute("host");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -402,7 +407,7 @@
 
     <div class="welcome-bar">
         <% String hostEmail = (String) session.getAttribute("hemail"); %>
-        Welcome, <%= hostEmail %>!
+        Welcome, <%=c.getHname()%>
     </div>
 
     <div class="dashboard-container">

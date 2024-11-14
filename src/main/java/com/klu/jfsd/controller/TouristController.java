@@ -68,6 +68,19 @@ public class TouristController {
 		mv.setViewName("touristlogin");
 		return mv;
 	}
+    @GetMapping("touristprofile")
+    public ModelAndView touristProfile(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Tourist tourist = (Tourist) session.getAttribute("tourist");
+
+        ModelAndView mv = new ModelAndView("touristprofile");
+        if (tourist == null) {
+            mv.addObject("errorMessage", "Please log in first.");
+            mv.setViewName("touristprofile"); // Redirect to login if tourist not found in session
+        }
+        
+        return mv;
+    }
 	@PostMapping("checktouristlogin")
 	public ModelAndView touristlogin(HttpServletRequest request)
 	{
@@ -91,5 +104,36 @@ public class TouristController {
 				}
 				return mv;
 	}
+	@PostMapping("updateTourist")
+    public ModelAndView updateTourist(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Tourist tourist = (Tourist) session.getAttribute("tourist");
+
+        if (tourist != null) {
+            // Get updated values from the form
+            tourist.setTname(request.getParameter("tname"));
+            tourist.setTgender(request.getParameter("tgender"));
+            tourist.setTdateofbirth(request.getParameter("tdateofbirth"));
+            tourist.setTemail(request.getParameter("temail"));
+            tourist.setTlocation(request.getParameter("tlocation"));
+            tourist.setTcontact(request.getParameter("tcontact"));
+
+            // Call the service to update the tourist in the database
+            touristservice.updateTourist(tourist);
+
+            // Update session with the modified tourist object
+            session.setAttribute("tourist", tourist);
+
+            // Redirect to profile page with updated information
+            ModelAndView mv = new ModelAndView("touristprofile");
+            mv.addObject("message", "Profile updated successfully");
+            return mv;
+        } else {
+            // Handle case if tourist is not found in session
+            ModelAndView mv = new ModelAndView("touristlogin");
+            mv.addObject("message", "Please log in to update your profile.");
+            return mv;
+        }
+    }
 	
 }

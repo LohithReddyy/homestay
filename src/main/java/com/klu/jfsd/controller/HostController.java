@@ -79,7 +79,7 @@ public class HostController {
 				if(host!=null)
 				{
 					HttpSession session = request.getSession();
-					session.setAttribute("tourist", host); // customer is the session object we can use 
+					session.setAttribute("host", host); // customer is the session object we can use 
 					mv.setViewName("hosthome");
 					// create a session variable 
 					
