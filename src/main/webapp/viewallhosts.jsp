@@ -40,5 +40,7 @@
         </c:forEach>
     </table>
     <a href="addhost">Add Host</a>
+    <a href="deletehost">Delete Host</a>
+    <a href="updatehost">Update Host</a>
 </body>
 </html>

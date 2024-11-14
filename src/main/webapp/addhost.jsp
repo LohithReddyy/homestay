@@ -9,9 +9,9 @@
 </head>
 <body>
 <%@ include file="mainnavbar.jsp" %>
-<h3 align="center">Host Registration Form</h3>
+<h3 align="center">Add Host</h3>
 <div class="container">
-    <form method="post" action="addhost">
+    <form method="post" action="addhostdetails">
         <label>Enter Name:</label>
         <input type="text" name="hname"/><br/>
         
@@ -44,7 +44,7 @@
         <label>Enter Bank IFSC Number:</label>
         <input type="number" name="hifsc"/><br/>
         
-        <input type="submit" value="submit" />
+        <input type="submit" value="ADD" />
     </form>
 </div>
 </body>

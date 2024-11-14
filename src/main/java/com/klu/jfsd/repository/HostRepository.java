@@ -11,4 +11,7 @@ import com.klu.jfsd.model.Tourist;
 public interface HostRepository extends JpaRepository<Host, Integer>{
 	@Query("select c from Host c where c.hemail=?1 and c.hpassword=?2")
 	public Host checkHostLogin(String email, String password);
+	
+	@Query("select count(h) from Host h where h.hid = ?1")
+	public long countHostsByHid(int hid);
 }
