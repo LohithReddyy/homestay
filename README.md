@@ -1,7 +1,7 @@
 
 # **Homestay Recommendation System**
 
-Welcome to the **Homestay Recommendation System**! Developed by **Likith Kandepu** and **Venu Sree Guduri**, this platform connects **homestay hosts** and **tourists** in a seamless manner, allowing for smooth interactions and comprehensive management through distinct user roles. From **Admins** overseeing the system, to **Hosts** managing their listings, and **Tourists** finding their perfect homestay, our system ensures a smooth and enjoyable experience for all users.
+Welcome to the **Homestay Recommendation System**! Developed by  **Venu Sree Guduri** and **Likith Kandepu**, this platform connects **homestay hosts** and **tourists** in a seamless manner, allowing for smooth interactions and comprehensive management through distinct user roles. From **Admins** overseeing the system, to **Hosts** managing their listings, and **Tourists** finding their perfect homestay, our system ensures a smooth and enjoyable experience for all users.
 
 ## **Modules & Features**
 
