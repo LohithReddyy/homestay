@@ -9,19 +9,8 @@
 <title>JFSD</title>
 </head>
 <body>
-<h3 align="center">Admin Registration Form</h3>
-<div class="container">
-    <form method="post" action="checkadminlogin">
-        <label>Enter Username:</label>
-        <input type="text" name="auname"/><br/>
-        
-       
-        <label>Enter Password:</label>
-        <input type="password" name="apwd"/><br/>
-        
-        <input type="submit" value="submit" /> 
-         <input type="reset" value="clear" />
-    </form>
+<a href="viewallhosts">View Hosts</a> <br/>
+<a href="viewalltourists">View Tourists</a>
 </div>
 </body>
 </html>

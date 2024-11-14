@@ -1,5 +1,7 @@
 package com.klu.jfsd.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +23,6 @@ public class HostServiceImp1 implements HostService{
 		
 		return hostrepository.checkHostLogin(email, password);
 	}
+	
 
 }

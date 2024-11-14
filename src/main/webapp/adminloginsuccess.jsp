@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-Login success
+ Host Added
 </body>
 </html>
