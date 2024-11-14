@@ -1,4 +1,8 @@
+<%@page import="com.klu.jfsd.model.Tourist"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+Tourist c=(Tourist)session.getAttribute("tourist");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -241,19 +245,20 @@
                 <a href="${pageContext.request.contextPath}/explore" class="nav-item">Explore</a>
                 <a href="${pageContext.request.contextPath}/bookings" class="nav-item">My Bookings</a>
                 <a href="${pageContext.request.contextPath}/wishlist" class="nav-item">Wishlist</a>
-                <a href="${pageContext.request.contextPath}/profile" class="nav-item">Profile</a>
+                <a href="${pageContext.request.contextPath}/touristprofile" class="nav-item">Profile</a>
             </div>
         </div>
     </nav>
     
+    
     <div class="welcome-bar">
         <% String touristEmail = (String) session.getAttribute("temail"); %>
-        Welcome, <%= touristEmail %>!
+        Welcome, <%= c.getTname()%>!
     </div>
 
     <div class="hero-section">
         <div class="hero-content">
-            <h1>Find Your Perfect Homestay</h1>
+            <h1>Find Your Perfect Homestay, <b><i><%= c.getTname()%>!</i></b></h1>
             <p>Discover unique accommodations and authentic local experiences</p>
             <div class="search-bar">
                 <input type="text" class="search-input" placeholder="Where would you like to stay?">

@@ -21,6 +21,10 @@ public class TouristServiceImp1 implements TouristService {
 		// TODO Auto-generated method stub
 		return touristrepository.checkTouristLogin(email, password);
 	}
+	  @Override
+	    public void updateTourist(Tourist tourist) {
+	        touristrepository.save(tourist); // This will update the tourist if it exists
+	    }
 	
 	
 
