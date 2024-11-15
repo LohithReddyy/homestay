@@ -16,5 +16,6 @@ public interface AdminService {
     public String addTourist(Tourist tourist);
     public String deleteTourist(int id);
     public String updateTourist(int id, Tourist tourist);
-    public long getHostCountByHid(int hid);
+    public long hostcount(); 
+    public long touristcount(); 
 }

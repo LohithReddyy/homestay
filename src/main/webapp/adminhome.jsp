@@ -1,4 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,11 +167,12 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>Total Hosts</h3>
-                <div class="number">${hostCount}</div>
+                <div class="number">${hostcount}</div>
+                
             </div>
             <div class="stat-card">
                 <h3>Total Tourists</h3>
-                <div class="number">${touristCount}</div>
+                <div class="number">${touristcount}</div>
             </div>
         </div>
 

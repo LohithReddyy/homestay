@@ -121,9 +121,17 @@ public class AdminServiceImp1 implements AdminService {
 	        return "Tourist Not Found";
 	    }
 	}
+
 	@Override
-	public long getHostCountByHid(int hid) {
-	    return hostrepository.countHostsByHid(hid);
+	public long hostcount() {
+		// TODO Auto-generated method stub
+		return hostrepository.count();
 	}
 
+	@Override
+	public long touristcount() {
+		// TODO Auto-generated method stub
+		return touristrepository.count();
+	}
+	
 }

@@ -44,7 +44,7 @@ public class AdminController {
 	 public ModelAndView adminHome(@RequestParam("hid") int hid) {
 	     ModelAndView mv = new ModelAndView();
 	     mv.setViewName("adminhome");
-	     mv.addObject("hostCount", adminservice.getHostCountByHid(hid));
+	     
 	     return mv;
 	 }
 	 @PostMapping("/checkadminlogin")
@@ -59,8 +59,10 @@ public class AdminController {
 				HttpSession session = request.getSession();
 				session.setAttribute("admin", admin);
 				mv.setViewName("adminhome");
-				//long customercount = adminservice.customercount();
-				//mv.addObject("count",customercount);
+				long hostcount = adminservice.hostcount();
+				mv.addObject("hostcount",hostcount);
+				long touristcount = adminservice.touristcount();
+				mv.addObject("touristcount",touristcount);
 			}
 			else
 			{
