@@ -9,4 +9,6 @@ public interface HomeService {
     Home addHome(Home home);
     String deleteHome(int id);
     String updateHome(int id, Home home);
+    Home findHomeById(int id);
+    
 }

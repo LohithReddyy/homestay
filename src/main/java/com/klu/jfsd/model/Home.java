@@ -13,8 +13,17 @@ public class Home {
     private int maxAdults;
     private String type; // Room, Villa, Homestay, Hotel
     private boolean available;
+    private double pricepernight;
 
-    // Getters and Setters
+    public double getPricepernight() {
+		return pricepernight;
+	}
+
+	public void setPricepernight(double pricepernight) {
+		this.pricepernight = pricepernight;
+	}
+
+	// Getters and Setters
     public int getId() {
         return id;
     }

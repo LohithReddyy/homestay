@@ -46,11 +46,18 @@ public class HomeServiceImpl implements HomeService {
             updatedHome.setMaxAdults(home.getMaxAdults());
             updatedHome.setType(home.getType());
             updatedHome.setAvailable(home.isAvailable());
-
+            updatedHome.setPricepernight(home.getPricepernight());
+            
             homeRepository.save(updatedHome);
             return "Home updated successfully.";
         } else {
             return "Home not found.";
         }
+    }
+    
+    @Override
+    public Home findHomeById(int id) {
+        // Retrieve the Home object using the repository
+        return homeRepository.findById(id).orElse(null);
     }
 }

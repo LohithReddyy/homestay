@@ -10,7 +10,7 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int homeId;
-    private String touristName;
+    private int touristId;
     private String email;
     private int numberOfGuests;
     private LocalDate startDate;
@@ -33,12 +33,12 @@ public class Booking {
         this.homeId = homeId;
     }
 
-    public String getTouristName() {
-        return touristName;
+    public int getTouristId() {
+        return touristId;
     }
 
-    public void setTouristName(String touristName) {
-        this.touristName = touristName;
+    public void setTouristId(int touristId) {
+        this.touristId = touristId;
     }
 
     public String getEmail() {

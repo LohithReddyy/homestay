@@ -10,51 +10,51 @@
 <body>
     <div class="container">
         <h2>Add New Home</h2>
-        <form action="/homes/add" method="POST">
-            <div class="form-group">
-                <label for="hname">Home Name:</label>
-                <input type="text" id="hname" name="hname" required>
+       <form action="addhomedetails" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" required><br>
+
+    <div class="form-group">
+                <label for="acRequired">AC Required:</label>
+                <select id="acRequired" name="ac" required>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
             </div>
-            <div class="form-group">
+
+
+    <div class="form-group">
+                <label for="maxAdults">Max Adults:</label>
+                <input type="number" id="maxAdults" name="maxAdults" required>
+            </div>
+
+
+   <div class="form-group">
                 <label for="htype">Home Type:</label>
-                <select id="htype" name="htype" required>
+                <select id="htype" name="type" required>
                     <option value="Room">Room</option>
                     <option value="Villa">Villa</option>
                     <option value="Homestay">Homestay</option>
                     <option value="Hotel">Hotel</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="acRequired">AC Required:</label>
-                <select id="acRequired" name="acRequired" required>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="maxAdults">Max Adults:</label>
-                <input type="number" id="maxAdults" name="maxAdults" required>
-            </div>
-            <div class="form-group">
-                <label for="availableFrom">Available From:</label>
-                <input type="date" id="availableFrom" name="availableFrom" required>
-            </div>
-            <div class="form-group">
-                <label for="availableUntil">Available Until:</label>
-                <input type="date" id="availableUntil" name="availableUntil" required>
-            </div>
-            <div class="form-group">
+
+
+    <label for="available">Available (true/false):</label>
+    <input type="text" id="available" name="available" required><br>
+    
+    <div class="form-group">
                 <label for="pricePerNight">Price per Night:</label>
-                <input type="number" id="pricePerNight" name="pricePerNight" required>
-            </div>
-            <div class="form-group">
-                <label for="location">Location:</label>
-                <input type="text" id="location" name="location" required>
-            </div>
-            <div class="form-group">
-                <button type="submit">Add Home</button>
-            </div>
-        </form>
+                <input type="number" id="pricePerNight" name="pricepernight" required>
+    </div>
+    
+
+    <button type="submit">Add Home</button>
+</form>
+
     </div>
 </body>
 </html>

@@ -7,21 +7,25 @@
     <title>Update Tourist</title>
 </head>
 <body>
-<%@ include file="mainnavbar.jsp" %>
+
 
 <h3 align="center">Update Tourist Information</h3>
 <div class="container">
     <form method="post" action="updatetouristdetails">
         <!-- Hidden field for tourist ID -->
-        <input type="hidden" name="tid" value="${tourist.tid}" />
+         <label>Enter Tourist ID:</label>
+        <input type="number" name="tid" required/><br/>
 
         <label>Enter Name:</label>
         <input type="text" name="tname" value="${tourist.tname}" required maxlength="100"/><br/>
 
-        <label>Select Gender:</label>
-        <input type="radio" name="tgender" value="MALE" <c:if test="${tourist.tgender == 'MALE'}">checked</c:if>/>Male
-        <input type="radio" name="tgender" value="FEMALE" <c:if test="${tourist.tgender == 'FEMALE'}">checked</c:if>/>Female
-        <input type="radio" name="tgender" value="OTHERS" <c:if test="${tourist.tgender == 'OTHERS'}">checked</c:if>/>Others <br/>
+         <label>Select Gender:</label>
+            <input type="radio" name="tgender" value="MALE" 
+                   ${tourist.tgender == 'MALE' ? 'checked' : ''}/>Male
+            <input type="radio" name="tgender" value="FEMALE" 
+                   ${tourist.tgender == 'FEMALE' ? 'checked' : ''}/>Female
+            <input type="radio" name="tgender" value="OTHERS" 
+                   ${tourist.tgender == 'OTHERS' ? 'checked' : ''}/>Others <br/>
 
         <label>Date of Birth:</label>
         <input type="date" name="tdateofbirth" value="${tourist.tdateofbirth}" maxlength="20"/><br/>

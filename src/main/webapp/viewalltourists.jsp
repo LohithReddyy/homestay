@@ -34,7 +34,7 @@
             </tr>
         </c:forEach>
     </table>
-     <a href="addtourist">Add Tourist</a>
+     
     <a href="deletetourist">Delete Tourist</a>
     <a href="updatetourist">Update Tourist</a>
 </body>

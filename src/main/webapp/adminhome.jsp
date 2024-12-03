@@ -212,6 +212,31 @@
                 <p>Register a new tourist account</p>
                 <a href="addtourist" class="action-link">Add Tourist</a>
             </div>
+            
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h3>Add New Home</h3>
+                <a href="addhome" class="action-link">Add Home</a>
+            </div>
+            
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Manage Home</h3>
+                <p>View, add, update, or remove home accounts</p>
+                <a href="viewallhomes" class="action-link">View All Homes</a>
+            </div>
+            
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h3>Book Home</h3>
+                <a href="addbooking" class="action-link">Book Home</a>
+            </div>
         </div>
     </div>
 </body>
