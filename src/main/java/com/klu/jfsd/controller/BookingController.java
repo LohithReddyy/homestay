@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.klu.jfsd.model.Booking;
 import com.klu.jfsd.model.Home;
+import com.klu.jfsd.model.Host;
 import com.klu.jfsd.model.Tourist;
 import com.klu.jfsd.service.AdminService;
 import com.klu.jfsd.service.BookingService;
@@ -29,7 +30,6 @@ public class BookingController {
     private TouristService touristService;
     @Autowired
     private AdminService adminService;
-    
 
 //    @GetMapping("/list")
 //    public String listBookings(Model model) {
@@ -56,37 +56,62 @@ public class BookingController {
 //        model.addAttribute("message", result);
 //        return "redirect:/bookings/list";
 //    }
-    
-    
-    
+
     @GetMapping("addbooking")
 	 public ModelAndView bookHome() {
 	     ModelAndView mv = new ModelAndView();
 	     mv.setViewName("add-booking");
+	     java.util.List<Tourist> tourist= adminService.viewAllTourists();
+		 mv.addObject("touristslist",tourist); 
+		 java.util.List<Home> homeList = homeService.viewAllHomes();
+	        mv.addObject("homeslist", homeList);
 	     return mv;
 	 }
     
+    @GetMapping("mybookings")
+    public ModelAndView myBookings()
+    {
+    	 ModelAndView mv = new ModelAndView();
+    	 mv.setViewName("mybookings");
+    	 return mv;
+    }
+    
+    @GetMapping("bookingconform")
+    public ModelAndView bookingconfo()
+    {
+    	 ModelAndView mv = new ModelAndView();
+    	 mv.setViewName("bookingconform");
+    	 return mv;
+    }
  
-    // Handle form submission
-    @PostMapping("/bookings/add")
+ // Method to handle booking form submission and display booking details
+    @PostMapping("/addbookingdetails")
     public String createBooking(@ModelAttribute Booking booking, Model model) {
         // Save the booking to the database
         String result = bookingService.createBooking(booking);
         
+        // Add booking details to the model to pass them to the JSP
+        model.addAttribute("homeId", booking.getHomeId());
+        model.addAttribute("touristId", booking.getTouristId());
+        model.addAttribute("email", booking.getEmail());
+        model.addAttribute("numberOfGuests", booking.getNumberOfGuests());
+        model.addAttribute("startDate", booking.getStartDate());
+        model.addAttribute("endDate", booking.getEndDate());
+        
         // Add success message
         model.addAttribute("message", result);
 
-        // Redirect to a list or success page
-        return "redirect:/bookings/list"; // Adjust path based on your app flow
+        // Redirect to the booking confirmation page
+        return "redirect:/bookingconform"; 
     }
 
-    // Display all bookings (Optional for navigation)
+   
+
     @GetMapping("/bookings/list")
     public String listBookings(Model model) {
         java.util.List<Booking> bookings = bookingService.getAllBookings();
         model.addAttribute("bookings", bookings);
         return "booking-list"; // JSP view name for the list
     }
-}
-    
 
+}

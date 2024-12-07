@@ -400,6 +400,7 @@ Host c=(Host)session.getAttribute("host");
                 <a href="${pageContext.request.contextPath}/bookings" class="nav-item">Bookings</a>
                 <a href="${pageContext.request.contextPath}/earnings" class="nav-item">Earnings</a>
                 <a href="${pageContext.request.contextPath}/profile" class="nav-item">Profile</a>
+                <a href="${pageContext.request.contextPath}/addhome" class="nav-item">Add Home</a>
                 <a href="${pageContext.request.contextPath}/hostlogin" class="nav-item">Logout</a>
             </div>
         </div>

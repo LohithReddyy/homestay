@@ -1,6 +1,8 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -120,23 +122,15 @@
 <body>
     <div class="container">
         <h1>Add a New Booking</h1>
-        <form action="/bookings/add" method="post">
+        <form action="/addbookingdetails" method="post">
             <div class="form-group">
                 <label for="homeId">Home:</label>
-                <select name="homeId" id="homeId" required>
-                    <c:forEach var="home" items="${homeslist}">
-                        <option value="${home.id}">${home.name}</option>
-                    </c:forEach>
-                </select>
+                <input type="text" name="homeId" id="homeId" value="${param.homeId}" readonly>
             </div>
 
             <div class="form-group">
                 <label for="touristId">Tourist:</label>
-                <select name="touristId" id="touristId" required>
-                    <c:forEach var="tourist" items="${touristslist}">
-                        <option value="${tourist.id}">${tourist.name}</option>
-                    </c:forEach>
-                </select>
+                <input type="text" name="touristId" id="touristId" value="${param.touristId}" readonly>
             </div>
 
             <div class="form-group">

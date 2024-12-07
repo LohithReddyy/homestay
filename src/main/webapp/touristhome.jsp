@@ -252,7 +252,7 @@ Tourist c=(Tourist)session.getAttribute("tourist");
             </a>
             <div class="nav-links">
                 <a href="${pageContext.request.contextPath}/explore" class="nav-item">Explore</a>
-                <a href="${pageContext.request.contextPath}/bookings" class="nav-item">My Bookings</a>
+                <a href="${pageContext.request.contextPath}/mybookings" class="nav-item">My Bookings</a>
                 <a href="${pageContext.request.contextPath}/wishlist" class="nav-item">Wishlist</a>
                 <a href="${pageContext.request.contextPath}/touristprofile" class="nav-item">Profile</a>
             </div>
@@ -275,8 +275,7 @@ Tourist c=(Tourist)session.getAttribute("tourist");
             </div>
         </div>
     </div>
-
-    <div class="featured-section">
+<div class="featured-section">
     <div class="section-title">
         <h2>Featured Homestays</h2>
         <p>Handpicked accommodations for your next adventure</p>
@@ -301,6 +300,8 @@ Tourist c=(Tourist)session.getAttribute("tourist");
                 <h3 class="destination-title"><%= home.getName() %></h3>
                 <p class="destination-location"><i class="fas fa-map-marker-alt"></i> <%= home.getLocation() %></p>
                 <p class="destination-price">₹<%= home.getPricepernight() %> per night</p>
+                <!-- Book Now button with redirect to /addbooking page -->
+                <a href="/addbooking?homeId=<%= home.getId() %>&touristId=<%=c.getTid() %>" class="book-now-btn">Book Now</a>
             </div>
         </div>
         <% 
@@ -313,6 +314,86 @@ Tourist c=(Tourist)session.getAttribute("tourist");
         %>
     </div>
 </div>
+
+<!-- Internal CSS for styling -->
+<style>
+    .featured-section {
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .section-title h2 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .section-title p {
+        font-size: 1rem;
+        color: #777;
+    }
+
+    .homestay-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .destination-card {
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .destination-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .destination-image {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .destination-details {
+        padding: 15px;
+    }
+
+    .destination-title {
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .destination-location {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 5px;
+    }
+
+    .destination-price {
+        font-size: 1.2rem;
+        color: #e91e63; /* Pink color */
+        font-weight: bold;
+    }
+
+    .book-now-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #e91e63; /* Pink color */
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .book-now-btn:hover {
+        background-color: #c2185b; /* Darker pink on hover */
+    }
+</style>
+
 
 
     <div class="features-section">
