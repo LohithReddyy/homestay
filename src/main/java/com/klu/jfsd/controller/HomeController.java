@@ -4,7 +4,10 @@ import com.klu.jfsd.model.Home;
 import com.klu.jfsd.model.Host;
 import com.klu.jfsd.service.HomeService;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +15,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.util.List;
 
 @Controller
+@MultipartConfig
 //@RequestMapping("/homes")
 public class HomeController {
 
@@ -75,7 +82,7 @@ public class HomeController {
 	     return mv;
 	 }
     @PostMapping("addhomedetails")
-    public ModelAndView addHome(HttpServletRequest request) {
+    public ModelAndView addHome(HttpServletRequest request) throws IOException, ServletException {
         // Retrieve form parameters from the request
         String name = request.getParameter("name");
         String location = request.getParameter("location");
@@ -84,6 +91,14 @@ public class HomeController {
         String type = request.getParameter("type");
         boolean available = Boolean.parseBoolean(request.getParameter("available")); // Parse boolean value for availability
         double pricepernight = Double.parseDouble(request.getParameter("pricepernight"));
+        Part filePart = request.getPart("image");
+        
+        if (filePart == null || filePart.getSize() == 0) {
+            throw new IllegalArgumentException("File part is missing or empty");
+        }
+        InputStream inputStream = filePart.getInputStream();
+        byte[] imageBytes = inputStream.readAllBytes();
+        
 
         // Create a new Home object and populate its fields
         Home home = new Home();
@@ -94,6 +109,8 @@ public class HomeController {
         home.setType(type);
         home.setAvailable(available);
         home.setPricepernight(pricepernight);
+        home.setImage(imageBytes);
+        
 
         // Call the service layer to handle the saving of the Home object
         String message = homeService.addHome(home) != null ? "Home added successfully!" : "Failed to add home.";

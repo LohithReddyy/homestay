@@ -1,5 +1,7 @@
 package com.klu.jfsd.model;
 
+import java.sql.Blob;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -14,8 +16,17 @@ public class Home {
     private String type; // Room, Villa, Homestay, Hotel
     private boolean available;
     private double pricepernight;
+    byte[] image;
 
-    public double getPricepernight() {
+    public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] imageBytes) {
+		this.image = imageBytes;
+	}
+
+	public double getPricepernight() {
 		return pricepernight;
 	}
 

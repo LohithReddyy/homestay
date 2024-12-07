@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <title>Home List</title>
@@ -49,6 +50,14 @@
         .add-home-link:hover {
             background-color: #45a049;
         }
+
+        img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -63,6 +72,7 @@
         <th>Max Adults</th>
         <th>Available</th>
         <th>Price per Night</th>
+        <th>Image</th>
         <th>Actions</th>
     </tr>
     <c:forEach var="home" items="${homeslist}">
@@ -75,6 +85,14 @@
             <td>${home.maxAdults}</td>
             <td>${home.available ? 'Yes' : 'No'}</td>
             <td>${home.pricepernight}</td>
+            <td>
+                <c:if test="${home.image != null}">
+                    <img src="data:image/jpeg;base64,${fn:escapeXml(home.image)}" alt="Home Image" />
+                </c:if>
+                <c:if test="${home.image == null}">
+                    No Image
+                </c:if>
+            </td>
             <td>
                 <a href="updatehome/${home.id}">Edit</a> |
                 <a href="deletehomedetails/${home.id}">Delete</a>

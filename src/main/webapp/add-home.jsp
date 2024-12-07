@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <h2>Add New Home</h2>
-       <form action="addhomedetails" method="post">
+       <form action="addhomedetails" method="post" enctype="multipart/form-data">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required><br>
 
@@ -50,7 +50,10 @@
                 <label for="pricePerNight">Price per Night:</label>
                 <input type="number" id="pricePerNight" name="pricepernight" required>
     </div>
-    
+    <div class="form-group">
+                <label for="image">Upload Image</label>
+                <input type="file" class="form-control-file" id="image" name="image" required>
+    </div>
 
     <button type="submit">Add Home</button>
 </form>
