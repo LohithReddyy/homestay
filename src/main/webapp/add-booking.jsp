@@ -7,114 +7,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Booking</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
-        :root {
-            --primary: #FF385C;
-            --primary-dark: #E31C5F;
-            --secondary: #00A699;
-            --background: #FFFFFF;
-            --gray-50: #F9FAFB;
-            --gray-200: #E5E7EB;
-            --gray-700: #374151;
-            --font-family: 'Poppins', sans-serif;
-        }
-
-        * {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-family);
-            background-color: var(--gray-50);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 1rem;
         }
 
         .container {
-            background-color: var(--background);
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            width: 100%;
             max-width: 600px;
-            padding: 2.5rem;
+            margin: 50px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
 
         h1 {
             text-align: center;
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        label {
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        input,
-        select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid var(--gray-200);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(255, 56, 92, 0.1);
-        }
-
-        input[type="submit"] {
-            padding: 0.75rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        input[type="submit"]:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 56, 92, 0.25);
+            color: #444;
+            margin-bottom: 20px;
         }
 
         .form-group {
-            display: flex;
-            flex-direction: column;
+            margin-bottom: 15px;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 2rem;
-            }
+        label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
         }
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 1.5rem;
-            }
+        input[type="text"], 
+        input[type="email"], 
+        input[type="number"], 
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+        }
 
-            h1 {
-                font-size: 1.75rem;
-            }
+        input[readonly] {
+            background-color: #e9ecef;
+            color: #777;
+        }
+
+        #payNow {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #payNow:hover {
+            background-color: #218838;
         }
     </style>
 </head>
@@ -122,7 +82,7 @@
 <body>
     <div class="container">
         <h1>Add a New Booking</h1>
-        <form action="/addbookingdetails" method="post">
+        <form id="bookingForm">
             <div class="form-group">
                 <label for="homeId">Home:</label>
                 <input type="text" name="homeId" id="homeId" value="${param.homeId}" readonly>
@@ -131,6 +91,11 @@
             <div class="form-group">
                 <label for="touristId">Tourist:</label>
                 <input type="text" name="touristId" id="touristId" value="${param.touristId}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="pricePerNight">Price per Night:</label>
+                <input type="text" name="pricePerNight" id="pricePerNight" value="${param.pricePerNight}" readonly>
             </div>
 
             <div class="form-group">
@@ -153,9 +118,49 @@
                 <input type="date" name="endDate" id="endDate" required>
             </div>
 
-            <input type="submit" value="Create Booking">
+            <input type="button" id="payNow" value="Proceed to Payment">
         </form>
     </div>
-</body>
 
+    <script>
+        document.getElementById('payNow').addEventListener('click', function () {
+            const bookingData = {
+                homeId: document.getElementById('homeId').value,
+                touristId: document.getElementById('touristId').value,
+                email: document.getElementById('email').value,
+                numberOfGuests: document.getElementById('numberOfGuests').value,
+                startDate: document.getElementById('startDate').value,
+                endDate: document.getElementById('endDate').value,
+                pricePerNight: document.getElementById('pricePerNight').value
+            };
+
+            fetch('/initiatePayment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(bookingData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const options = {
+                    key: "rzp_test_FmhSMoagxjdqsj",
+                    amount: bookingData.pricePerNight * 100, // Convert price to paise
+                    currency: "INR",
+                    name: "Book Your Homestay",
+                    description: `Booking payment for Home ID ${bookingData.homeId}`,
+                    handler: function (response) {
+                        alert(`Payment of Rs. ${bookingData.pricePerNight} was successful!`);
+                        window.location.href = "/checktouristlogin";
+                    },
+                    prefill: {
+                        email: bookingData.email
+                    }
+                };
+
+                const rzp = new Razorpay(options);
+                rzp.open();
+            })
+            .catch(err => console.error('Payment initialization failed:', err));
+        });
+    </script>
+</body>
 </html>

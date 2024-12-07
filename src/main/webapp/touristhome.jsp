@@ -251,10 +251,10 @@ Tourist c=(Tourist)session.getAttribute("tourist");
                 <i class="fas fa-home"></i> Travel & HomeStay
             </a>
             <div class="nav-links">
-                <a href="${pageContext.request.contextPath}/explore" class="nav-item">Explore</a>
+                <a href="${pageContext.request.contextPath}/checktouristlogin" class="nav-item">Explore</a>
                 <a href="${pageContext.request.contextPath}/mybookings" class="nav-item">My Bookings</a>
-                <a href="${pageContext.request.contextPath}/wishlist" class="nav-item">Wishlist</a>
                 <a href="${pageContext.request.contextPath}/touristprofile" class="nav-item">Profile</a>
+                <a href="${pageContext.request.contextPath}/touristlogin" class="nav-item">Logout</a>
             </div>
         </div>
     </nav>
@@ -301,7 +301,7 @@ Tourist c=(Tourist)session.getAttribute("tourist");
                 <p class="destination-location"><i class="fas fa-map-marker-alt"></i> <%= home.getLocation() %></p>
                 <p class="destination-price">₹<%= home.getPricepernight() %> per night</p>
                 <!-- Book Now button with redirect to /addbooking page -->
-                <a href="/addbooking?homeId=<%= home.getId() %>&touristId=<%=c.getTid() %>" class="book-now-btn">Book Now</a>
+                <a href="/addbooking?homeId=<%= home.getId() %>&touristId=<%=c.getTid() %>&pricePerNight=<%= home.getPricepernight() %>" class="book-now-btn">Book Now</a>
             </div>
         </div>
         <% 
