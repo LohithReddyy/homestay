@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.klu.jfsd.model.Home" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -359,38 +361,39 @@
     </section>
 
     <!-- Featured Destinations -->
-    <section class="section section-light">
-        <div class="section-title">
-            <h2>Featured Destinations</h2>
-            <p>Handpicked accommodations for your next adventure</p>
-        </div>
-        <div class="grid">
+     <section class="section section-light">
+    <div class="section-title">
+        <h2>Featured Destinations</h2>
+        <p>Handpicked accommodations for your next adventure</p>
+    </div>
+    <div class="grid">
+        <% 
+            List<Home> homeList = (List<Home>) request.getAttribute("homeList");
+            if (homeList != null && !homeList.isEmpty()) {
+                for (Home home : homeList) { 
+                    String base64Image = null;
+                    if (home.getImage() != null) {
+                        base64Image = "data:image/jpeg;base64," + java.util.Base64.getEncoder().encodeToString(home.getImage());
+                    }
+        %>
             <div class="destination-card">
-                <div class="destination-image" style="background-image: url('https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="destination-image" style="background-image: url('<%= base64Image %>')"></div>
                 <div class="destination-details">
-                    <h3 class="destination-title">Luxury Villa with Pool</h3>
-                    <p class="destination-location"><i class="fas fa-map-marker-alt"></i> Goa, India</p>
-                    <p class="destination-price">₹12,000 per night</p>
+                    <h3 class="destination-title"><%= home.getName() %></h3>
+                    <p class="destination-location"><i class="fas fa-map-marker-alt"></i> <%= home.getLocation() %></p>
+                    <p class="destination-price">₹<%= home.getPricepernight() %> per night</p>
                 </div>
             </div>
-            <div class="destination-card">
-                <div class="destination-image" style="background-image: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
-                <div class="destination-details">
-                    <h3 class="destination-title">Mountain View Cottage</h3>
-                    <p class="destination-location"><i class="fas fa-map-marker-alt"></i> Manali, India</p>
-                    <p class="destination-price">₹8,000 per night</p>
-                </div>
-            </div>
-            <div class="destination-card">
-                <div class="destination-image" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
-                <div class="destination-details">
-                    <h3 class="destination-title">Heritage Haveli</h3>
-                    <p class="destination-location"><i class="fas fa-map-marker-alt"></i> Jaipur, India</p>
-                    <p class="destination-price">₹15,000 per night</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <% 
+                } 
+            } else { 
+        %>
+            <p>No destinations available at the moment. Please check back later.</p>
+        <% 
+            } 
+        %>
+    </div>
+</section>
 
     <!-- Promotion Banner -->
     <section class="promotion-banner">

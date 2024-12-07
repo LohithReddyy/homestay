@@ -1,12 +1,18 @@
 package com.klu.jfsd.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.klu.jfsd.model.Home;
+import com.klu.jfsd.model.Host;
 import com.klu.jfsd.model.Tourist;
+import com.klu.jfsd.service.AdminService;
+import com.klu.jfsd.service.HomeService;
 import com.klu.jfsd.service.TouristService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,14 +23,18 @@ public class TouristController {
 	
 	@Autowired
 	private TouristService touristservice;
+	@Autowired
+	private AdminService adminservice;
+	@Autowired
+	private HomeService homeservice;
 	
-	@GetMapping("/")
-	public ModelAndView home()
-	{
-		ModelAndView mv=new ModelAndView();
-		mv.setViewName("home");
-		return mv;
-	}
+	 @GetMapping("/")
+	 public ModelAndView home() {
+		    ModelAndView mv = new ModelAndView("home");
+		    List<Home> homeList = homeservice.viewAllHomes();
+		    mv.addObject("homeList", homeList);
+		    return mv;
+		}
 	
 	@GetMapping("touristregistration")
 	public ModelAndView touristregistration()
@@ -94,6 +104,8 @@ public class TouristController {
 					HttpSession session = request.getSession();
 					session.setAttribute("tourist", tourist); // customer is the session object we can use 
 					mv.setViewName("touristhome");
+					List<Home> homeList = homeservice.viewAllHomes();
+					mv.addObject("homeList", homeList);
 					// create a session variable 
 					
 				}

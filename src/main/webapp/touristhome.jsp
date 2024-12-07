@@ -3,6 +3,8 @@
 <%
 Tourist c=(Tourist)session.getAttribute("tourist");
 %>
+<%@ page import="com.klu.jfsd.model.Home" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +30,13 @@ Tourist c=(Tourist)session.getAttribute("tourist");
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
+        .destination-image {
+    width: 100%; /* Or set a fixed size */
+    height: 200px; /* Example height */
+    background-size: cover;
+    background-position: center;
+}
+        
          /* Navbar Styles */
         .navbar {
             background: white;
@@ -268,37 +277,43 @@ Tourist c=(Tourist)session.getAttribute("tourist");
     </div>
 
     <div class="featured-section">
-        <div class="section-title">
-            <h2>Featured Homestays</h2>
-            <p>Handpicked accommodations for your next adventure</p>
-        </div>
-        <div class="homestay-grid">
-            <div class="homestay-card">
-                <div class="homestay-image" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80')"></div>
-                <div class="homestay-details">
-                    <h3 class="homestay-title">Cozy Mountain Retreat</h3>
-                    <p class="homestay-location"><i class="fas fa-map-marker-alt"></i> Manali, India</p>
-                    <p class="homestay-price">₹4,500 per night</p>
-                </div>
-            </div>
-            <div class="homestay-card">
-                <div class="homestay-image" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80')"></div>
-                <div class="homestay-details">
-                    <h3 class="homestay-title">Beachfront Villa</h3>
-                    <p class="homestay-location"><i class="fas fa-map-marker-alt"></i> Goa, India</p>
-                    <p class="homestay-price">₹6,000 per night</p>
-                </div>
-            </div>
-            <div class="homestay-card">
-                <div class="homestay-image" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80')"></div>
-                <div class="homestay-details">
-                    <h3 class="homestay-title">Heritage Haveli</h3>
-                    <p class="homestay-location"><i class="fas fa-map-marker-alt"></i> Jaipur, India</p>
-                    <p class="homestay-price">₹5,500 per night</p>
-                </div>
-            </div>
-        </div>
+    <div class="section-title">
+        <h2>Featured Homestays</h2>
+        <p>Handpicked accommodations for your next adventure</p>
     </div>
+    <div class="homestay-grid">
+        <% 
+        List<Home> homeList = (List<Home>) request.getAttribute("homeList");
+        if (homeList != null && !homeList.isEmpty()) {
+            for (Home home : homeList) { 
+                String base64Image = null;
+                if (home.getImage() != null) {
+                    base64Image = "data:image/jpeg;base64," + java.util.Base64.getEncoder().encodeToString(home.getImage());
+                } else {
+                    System.out.println("Image for home " + home.getName() + " is null");
+                }
+        %>
+        <div class="destination-card">
+            <div class="destination-image" 
+                 style="background-image: url('<%= base64Image != null ? base64Image : "default-placeholder.jpg" %>')">
+            </div>
+            <div class="destination-details">
+                <h3 class="destination-title"><%= home.getName() %></h3>
+                <p class="destination-location"><i class="fas fa-map-marker-alt"></i> <%= home.getLocation() %></p>
+                <p class="destination-price">₹<%= home.getPricepernight() %> per night</p>
+            </div>
+        </div>
+        <% 
+            } 
+        } else { 
+        %>
+        <p>No destinations available at the moment. Please check back later.</p>
+        <% 
+        } 
+        %>
+    </div>
+</div>
+
 
     <div class="features-section">
         <div class="section-title">

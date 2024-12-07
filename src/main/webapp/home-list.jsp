@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <title>Home List</title>
@@ -23,6 +22,14 @@
             background-color: #f2f2f2;
         }
 
+        img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
         a {
             text-decoration: none;
             color: blue;
@@ -30,33 +37,6 @@
 
         a:hover {
             text-decoration: underline;
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        .add-home-link {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        .add-home-link:hover {
-            background-color: #45a049;
-        }
-
-        img {
-            max-width: 100px;
-            max-height: 100px;
-            object-fit: cover;
-            border: 1px solid #ddd;
-            border-radius: 5px;
         }
     </style>
 </head>
@@ -86,12 +66,7 @@
             <td>${home.available ? 'Yes' : 'No'}</td>
             <td>${home.pricepernight}</td>
             <td>
-                <c:if test="${home.image != null}">
-                    <img src="data:image/jpeg;base64,${fn:escapeXml(home.image)}" alt="Home Image" />
-                </c:if>
-                <c:if test="${home.image == null}">
-                    No Image
-                </c:if>
+                <img src="homeimage/${home.id}" alt="Home Image" />
             </td>
             <td>
                 <a href="updatehome/${home.id}">Edit</a> |
@@ -101,7 +76,7 @@
     </c:forEach>
 </table>
 <div style="text-align: center;">
-    <a href="addhome" class="add-home-link">Add Home</a>
+    <a href="addhome" style="padding: 10px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">Add Home</a>
 </div>
 </body>
 </html>
