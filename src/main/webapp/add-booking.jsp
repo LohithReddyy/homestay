@@ -149,7 +149,7 @@
                     description: `Booking payment for Home ID ${bookingData.homeId}`,
                     handler: function (response) {
                         alert(`Payment of Rs. ${bookingData.pricePerNight} was successful!`);
-                        window.location.href = "/checktouristlogin";
+                        window.location.href = "/";
                     },
                     prefill: {
                         email: bookingData.email

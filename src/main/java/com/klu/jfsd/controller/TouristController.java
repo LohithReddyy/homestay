@@ -108,6 +108,7 @@ public class TouristController {
 					mv.addObject("homeList", homeList);
 					// create a session variable 
 					
+					
 				}
 				else
 				{

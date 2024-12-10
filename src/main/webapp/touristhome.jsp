@@ -251,15 +251,15 @@ Tourist c=(Tourist)session.getAttribute("tourist");
                 <i class="fas fa-home"></i> Travel & HomeStay
             </a>
             <div class="nav-links">
-                <a href="${pageContext.request.contextPath}/checktouristlogin" class="nav-item">Explore</a>
-                <a href="${pageContext.request.contextPath}/mybookings" class="nav-item">My Bookings</a>
+                <a href="${pageContext.request.contextPath}/" class="nav-item">Explore</a>
+                
                 <a href="${pageContext.request.contextPath}/touristprofile" class="nav-item">Profile</a>
                 <a href="${pageContext.request.contextPath}/touristlogin" class="nav-item">Logout</a>
             </div>
         </div>
     </nav>
     
-    
+   
     <div class="welcome-bar">
         <% String touristEmail = (String) session.getAttribute("temail"); %>
         Welcome, <%= c.getTname()%>!
